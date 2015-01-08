@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="lib/httpmime-4.3.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/Users/user/Documents/apache-tomcat-7.0.50/lib/org.apache.commons.httpclient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
