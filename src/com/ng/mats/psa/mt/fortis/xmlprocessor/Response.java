@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder = { "message", "transactionTime", "debitamt", "creditamt",
-		"charges", "destinationMDN", "transferID", "parentTxnID", "sctlID" })
+		"charges", "destinationMDN", "transferID", "parentTxnID", "sctlID",
+		"amount", "responseCode" })
 public class Response {
 
 	private Message message = null;
@@ -17,6 +18,8 @@ public class Response {
 	private TransferID transferID = null;
 	private ParentTxnID parentTxnID = null;
 	private SctlID sctlID = null;
+	private Amount amount = null;
+	private ResponseCode responseCode = null;
 
 	@Override
 	public String toString() {
@@ -24,7 +27,8 @@ public class Response {
 				+ transactionTime + ", debitamt=" + debitamt + ", creditamt="
 				+ creditamt + ", charges=" + charges + ", destinationMDN="
 				+ destinationMDN + ", transferID=" + transferID
-				+ ", parentTxnID=" + parentTxnID + ", sctlID=" + sctlID + '}';
+				+ ", parentTxnID=" + parentTxnID + ", sctlID=" + sctlID
+				+ ", Amount=" + amount + ", ResponseCode=" + responseCode + '}';
 	}
 
 	public Message getMessage() {
@@ -97,5 +101,21 @@ public class Response {
 
 	public void setSctlID(SctlID sctlID) {
 		this.sctlID = sctlID;
+	}
+
+	public Amount getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Amount amount) {
+		this.amount = amount;
+	}
+
+	public ResponseCode getResponseCode() {
+		return responseCode;
+	}
+
+	public void setResponseCode(ResponseCode responseCode) {
+		this.responseCode = responseCode;
 	}
 }

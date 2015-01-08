@@ -32,6 +32,7 @@ public class MoneyTransfer {
 	private String destBankCode;
 	// cashout enquiry
 	private String agentCode;
+	private String secreteCode;
 
 	public MoneyTransfer() {
 
@@ -211,6 +212,14 @@ public class MoneyTransfer {
 
 	public void setAgentCode(String agentCode) {
 		this.agentCode = agentCode;
+	}
+
+	public String getSecreteCode() {
+		return secreteCode;
+	}
+
+	public void setSecreteCode(String secreteCode) {
+		this.secreteCode = secreteCode;
 	}
 
 }
