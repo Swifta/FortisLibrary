@@ -6,6 +6,7 @@ public class Constants {
 	public final static String agentNumber = "2348051739048";
 	public final static String customerNumber = "2348066569192";
 	public final static String agentPIN = "6138";
+	public final static String agentCode = "abj00289";
 
 	public final static String account = "Account";
 	public final static String wallet = "Wallet";

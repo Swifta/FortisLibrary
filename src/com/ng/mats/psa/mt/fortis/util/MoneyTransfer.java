@@ -33,6 +33,13 @@ public class MoneyTransfer {
 	// cashout enquiry
 	private String agentCode;
 	private String secreteCode;
+	// airtime
+	private String companyId;
+	// bill payment
+	private String billerCode;
+	private String billNo;
+	// third party
+	private String partnerCode;
 
 	public MoneyTransfer() {
 
@@ -220,6 +227,38 @@ public class MoneyTransfer {
 
 	public void setSecreteCode(String secreteCode) {
 		this.secreteCode = secreteCode;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getBillerCode() {
+		return billerCode;
+	}
+
+	public void setBillerCode(String billerCode) {
+		this.billerCode = billerCode;
+	}
+
+	public String getBillNo() {
+		return billNo;
+	}
+
+	public void setBillNo(String billNo) {
+		this.billNo = billNo;
+	}
+
+	public String getPartnerCode() {
+		return partnerCode;
+	}
+
+	public void setPartnerCode(String partnerCode) {
+		this.partnerCode = partnerCode;
 	}
 
 }

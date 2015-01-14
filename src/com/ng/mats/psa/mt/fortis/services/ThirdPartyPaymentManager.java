@@ -13,15 +13,16 @@ import com.ng.mats.psa.mt.fortis.util.UrlProcessor;
 import com.ng.mats.psa.mt.fortis.xmlprocessor.Response;
 import com.ng.mats.psa.mt.fortis.xmlprocessor.ResponseProcessor;
 
-public class AirtimeManager {
+public class ThirdPartyPaymentManager {
 	private static final Logger logger = Logger.getLogger(BalanceManager.class
 			.getName());
 
-	public Response initiateAirtimeSale(MoneyTransfer moneyTransfer) {
+	public Response initiateThirdPartyPayment(MoneyTransfer moneyTransfer) {
 		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASEINQUIRY);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair for check balance");
 		List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+
 		nameValuePairList.add(new NameValuePair("channelID", moneyTransfer
 				.getChannelId()));
 		logger.info("-----------------------After setting channel ID");
@@ -42,12 +43,12 @@ public class AirtimeManager {
 				moneyTransfer.getSourcePocketCode()));
 		logger.info("-----------------------After setting sourcePocketCode");
 
-		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
-				.getDestMdn()));
-		logger.info("-----------------------After setting destMDN");
-		nameValuePairList.add(new NameValuePair("companyID", moneyTransfer
-				.getCompanyId()));
-		logger.info("-----------------------After setting companyID");
+		nameValuePairList.add(new NameValuePair("partnerCode", moneyTransfer
+				.getPartnerCode()));
+		logger.info("-----------------------After setting partnerCode");
+		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
+				.getBillNo()));
+		logger.info("-----------------------After setting billNo");
 		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
 				.getAmount()));
 		logger.info("-----------------------After setting amount");
@@ -59,11 +60,12 @@ public class AirtimeManager {
 
 	}
 
-	public Response confirmAirtimeSale(MoneyTransfer moneyTransfer) {
+	public Response confirmThirdPartyPayments(MoneyTransfer moneyTransfer) {
 		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASE);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair");
 		List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+
 		nameValuePairList.add(new NameValuePair("channelID", moneyTransfer
 				.getChannelId()));
 		logger.info("-----------------------After setting channel ID");
@@ -86,9 +88,6 @@ public class AirtimeManager {
 		nameValuePairList.add(new NameValuePair("confirmed", moneyTransfer
 				.getConfirmed()));
 		logger.info("-----------------------After setting confirmed");
-		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
-				.getDestMdn()));
-		logger.info("-----------------------After setting destMDN");
 		nameValuePairList.add(new NameValuePair("parentTxnID", moneyTransfer
 				.getParentTxnId()));
 		logger.info("-----------------------After setting parentTxnID");
@@ -98,6 +97,20 @@ public class AirtimeManager {
 		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
 				.getAmount()));
 		logger.info("-----------------------After setting amount");
+		nameValuePairList.add(new NameValuePair("sourcePocketCode",
+				moneyTransfer.getSourcePocketCode()));
+		logger.info("-----------------------After setting sourcePocketCode");
+
+		nameValuePairList.add(new NameValuePair("partnerCode", moneyTransfer
+				.getPartnerCode()));
+		logger.info("-----------------------After setting partnerCode");
+		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
+				.getBillNo()));
+		logger.info("-----------------------After setting billNo");
+		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
+				.getAmount()));
+		logger.info("-----------------------After setting amount");
+
 		logger.info("-----------------------Before generating url");
 		String url = UrlProcessor.generateUrl(nameValuePairList);
 		logger.info("-----------------------After initiating connection manager");

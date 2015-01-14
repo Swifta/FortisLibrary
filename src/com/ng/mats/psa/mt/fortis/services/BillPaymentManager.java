@@ -13,11 +13,11 @@ import com.ng.mats.psa.mt.fortis.util.UrlProcessor;
 import com.ng.mats.psa.mt.fortis.xmlprocessor.Response;
 import com.ng.mats.psa.mt.fortis.xmlprocessor.ResponseProcessor;
 
-public class AirtimeManager {
-	private static final Logger logger = Logger.getLogger(BalanceManager.class
-			.getName());
+public class BillPaymentManager {
+	private static final Logger logger = Logger
+			.getLogger(BillPaymentManager.class.getName());
 
-	public Response initiateAirtimeSale(MoneyTransfer moneyTransfer) {
+	public Response initiateBillPayment(MoneyTransfer moneyTransfer) {
 		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASEINQUIRY);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair for check balance");
@@ -42,15 +42,18 @@ public class AirtimeManager {
 				moneyTransfer.getSourcePocketCode()));
 		logger.info("-----------------------After setting sourcePocketCode");
 
+		nameValuePairList.add(new NameValuePair("billerCode", moneyTransfer
+				.getBillerCode()));
+		logger.info("-----------------------After setting billerCode");
+		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
+				.getCompanyId()));
+		logger.info("-----------------------After setting billNo");
+		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
+				.getBillNo()));
+		logger.info("-----------------------After setting amount");
 		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
 				.getDestMdn()));
 		logger.info("-----------------------After setting destMDN");
-		nameValuePairList.add(new NameValuePair("companyID", moneyTransfer
-				.getCompanyId()));
-		logger.info("-----------------------After setting companyID");
-		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
-				.getAmount()));
-		logger.info("-----------------------After setting amount");
 
 		logger.info("-----------------------Before generating url");
 		String url = UrlProcessor.generateUrl(nameValuePairList);
@@ -59,7 +62,7 @@ public class AirtimeManager {
 
 	}
 
-	public Response confirmAirtimeSale(MoneyTransfer moneyTransfer) {
+	public Response confirmBillPayment(MoneyTransfer moneyTransfer) {
 		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASE);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair");
@@ -86,22 +89,27 @@ public class AirtimeManager {
 		nameValuePairList.add(new NameValuePair("confirmed", moneyTransfer
 				.getConfirmed()));
 		logger.info("-----------------------After setting confirmed");
+		nameValuePairList.add(new NameValuePair("sourcePocketCode",
+				moneyTransfer.getSourcePocketCode()));
+		logger.info("-----------------------After setting sourcePocketCode");
+
+		nameValuePairList.add(new NameValuePair("billerCode", moneyTransfer
+				.getBillerCode()));
+		logger.info("-----------------------After setting billerCode");
+		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
+				.getCompanyId()));
+		logger.info("-----------------------After setting billNo");
 		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
 				.getDestMdn()));
 		logger.info("-----------------------After setting destMDN");
 		nameValuePairList.add(new NameValuePair("parentTxnID", moneyTransfer
 				.getParentTxnId()));
 		logger.info("-----------------------After setting parentTxnID");
-		nameValuePairList.add(new NameValuePair("companyID", moneyTransfer
-				.getCompanyId()));
-		logger.info("-----------------------After setting companyID");
-		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
-				.getAmount()));
-		logger.info("-----------------------After setting amount");
 		logger.info("-----------------------Before generating url");
 		String url = UrlProcessor.generateUrl(nameValuePairList);
 		logger.info("-----------------------After initiating connection manager");
 		return ResponseProcessor.unMarshal(ConnectionManager.connectToUrl(url));
 
 	}
+
 }
