@@ -14,10 +14,10 @@ import com.ng.mats.psa.mt.fortis.xmlprocessor.Response;
 public class FortisClient {
 	private static final Logger logger = Logger.getLogger(FortisClient.class
 			.getName());
+	public MoneyTransfer moneyTransfer = new MoneyTransfer();
 
 	public FortisClient(String serviceName, String txnName) {
 		logger.info("-----------------------Inside instance of Fortis Client");
-		MoneyTransfer moneyTransfer = new MoneyTransfer();
 		moneyTransfer.setChannelId(Constants.CHANNELID);
 		moneyTransfer.setSourceMdn(Constants.agentNumber);
 		moneyTransfer.setSourcePin(Constants.agentPIN);
@@ -28,22 +28,7 @@ public class FortisClient {
 
 		logger.info("-----------------------after instantiating login manager");
 		loginManager.initiateLogin(moneyTransfer);
-		moneyTransfer.setSourcePocketCode(Constants.SOURCEPOCKETCODEWALLET);
-		moneyTransfer.setDestMdn(Constants.customerNumber);
-		moneyTransfer.setConfirmed("true");
-		moneyTransfer.setAgentCode(Constants.agentCode);
-		moneyTransfer.setDestPocketCode(Constants.DESTINATIONPOCKETCODEWALLET);
-		moneyTransfer.setAmount("80");
-		moneyTransfer.setCompanyId("");
-		moneyTransfer.setBillerCode("");
-		moneyTransfer.setBillNo("");
-		// Response response = performBillPayment(moneyTransfer);
-		Response response = performThirdPartyPayment(moneyTransfer);
-		// Response response = performCashin(moneyTransfer);
-		// Response response = getBalance(moneyTransfer);
-		// Response response = performAirtimeSales(moneyTransfer);
-		logger.info("-----------------------After initiating login"
-				+ response.toString());
+
 	}
 
 	public Response performCashin(MoneyTransfer moneyTransfer) {
@@ -169,7 +154,29 @@ public class FortisClient {
 		return response;
 	}
 
+	public void finalizeFortisClient() {
+		moneyTransfer.setSourcePocketCode(Constants.SOURCEPOCKETCODEWALLET);
+		moneyTransfer.setDestMdn(Constants.customerNumber);
+		moneyTransfer.setConfirmed("true");
+		moneyTransfer.setAgentCode(Constants.agentCode);
+		moneyTransfer.setDestPocketCode(Constants.DESTINATIONPOCKETCODEWALLET);
+		moneyTransfer.setAmount("180");
+		moneyTransfer.setCompanyId("");
+		moneyTransfer.setBillerCode("");
+		moneyTransfer.setBillNo("");
+		// Response response = performBillPayment(moneyTransfer);
+		// Response response = performThirdPartyPayment(moneyTransfer);
+		// Response response = performCashin(moneyTransfer);
+		// Response response = getBalance(moneyTransfer);
+		Response response = performAirtimeSales(moneyTransfer);
+		// Response response = performCashoutUnregistered(moneyTransfer);
+		logger.info("-----------------------After initiating login"
+				+ response.toString());
+	}
+
 	public static void main(String args[]) {
-		new FortisClient(Constants.account, Constants.TXNLOGIN);
+		FortisClient fortisClient = new FortisClient(Constants.account,
+				Constants.TXNLOGIN);
+		fortisClient.finalizeFortisClient();
 	}
 }

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlType(propOrder = { "message", "transactionTime", "debitamt", "creditamt",
 		"charges", "destinationMDN", "transferID", "parentTxnID", "sctlID",
-		"amount", "responseCode" })
+		"amount", "responseCode", "refID", "status" })
 public class Response {
 
 	private Message message = null;
@@ -20,6 +20,8 @@ public class Response {
 	private SctlID sctlID = null;
 	private Amount amount = null;
 	private ResponseCode responseCode = null;
+	private RefID refID = null;
+	private Status status = null;
 
 	@Override
 	public String toString() {
@@ -28,7 +30,8 @@ public class Response {
 				+ creditamt + ", charges=" + charges + ", destinationMDN="
 				+ destinationMDN + ", transferID=" + transferID
 				+ ", parentTxnID=" + parentTxnID + ", sctlID=" + sctlID
-				+ ", Amount=" + amount + ", ResponseCode=" + responseCode + '}';
+				+ ", Amount=" + amount + ", ResponseCode=" + responseCode
+				+ ", refID=" + refID + ",Status=" + status + '}';
 	}
 
 	public Message getMessage() {
@@ -117,5 +120,21 @@ public class Response {
 
 	public void setResponseCode(ResponseCode responseCode) {
 		this.responseCode = responseCode;
+	}
+
+	public RefID getRefID() {
+		return refID;
+	}
+
+	public void setRefID(RefID refID) {
+		this.refID = refID;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 }
