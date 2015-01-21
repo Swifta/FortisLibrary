@@ -156,19 +156,23 @@ public class FortisClient {
 
 	public void finalizeFortisClient() {
 		moneyTransfer.setSourcePocketCode(Constants.SOURCEPOCKETCODEWALLET);
-		moneyTransfer.setDestMdn(Constants.customerNumber);
+		// moneyTransfer.setDestMdn(Constants.customerNumber);
+		moneyTransfer.setDestMdn(Constants.unregisteredCustomerNumber);
 		moneyTransfer.setConfirmed("true");
 		moneyTransfer.setAgentCode(Constants.agentCode);
 		moneyTransfer.setDestPocketCode(Constants.DESTINATIONPOCKETCODEWALLET);
-		moneyTransfer.setAmount("180");
+		moneyTransfer.setAmount("480");
 		moneyTransfer.setCompanyId("");
-		moneyTransfer.setBillerCode("");
-		moneyTransfer.setBillNo("");
+		moneyTransfer.setBillerCode("20702");
+		moneyTransfer.setBillNo("12345678");
+		moneyTransfer.setPartnerCode("MER287");
+		moneyTransfer.setSecreteCode("384138407");
+		moneyTransfer.setTransferId("475688");
 		// Response response = performBillPayment(moneyTransfer);
-		// Response response = performThirdPartyPayment(moneyTransfer);
+		Response response = performThirdPartyPayment(moneyTransfer);
 		// Response response = performCashin(moneyTransfer);
 		// Response response = getBalance(moneyTransfer);
-		Response response = performAirtimeSales(moneyTransfer);
+		// Response response = performAirtimeSales(moneyTransfer);
 		// Response response = performCashoutUnregistered(moneyTransfer);
 		logger.info("-----------------------After initiating login"
 				+ response.toString());

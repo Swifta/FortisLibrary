@@ -18,7 +18,7 @@ public class BillPaymentManager {
 			.getLogger(BillPaymentManager.class.getName());
 
 	public Response initiateBillPayment(MoneyTransfer moneyTransfer) {
-		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASEINQUIRY);
+		moneyTransfer.setTxnName(Constants.TXNAGENTBILLPAYINQUIRY);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair for check balance");
 		List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
@@ -46,10 +46,10 @@ public class BillPaymentManager {
 				.getBillerCode()));
 		logger.info("-----------------------After setting billerCode");
 		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
-				.getCompanyId()));
+				.getBillNo()));
 		logger.info("-----------------------After setting billNo");
 		nameValuePairList.add(new NameValuePair("amount", moneyTransfer
-				.getBillNo()));
+				.getAmount()));
 		logger.info("-----------------------After setting amount");
 		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
 				.getDestMdn()));
@@ -63,7 +63,7 @@ public class BillPaymentManager {
 	}
 
 	public Response confirmBillPayment(MoneyTransfer moneyTransfer) {
-		moneyTransfer.setTxnName(Constants.TXNAIRTIMEPURCHASE);
+		moneyTransfer.setTxnName(Constants.TXNAGENTBILLPAY);
 		moneyTransfer.setService(Constants.agent);
 		logger.info("-----------------------Before initiating namve value pair");
 		List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
@@ -97,7 +97,7 @@ public class BillPaymentManager {
 				.getBillerCode()));
 		logger.info("-----------------------After setting billerCode");
 		nameValuePairList.add(new NameValuePair("billNo", moneyTransfer
-				.getCompanyId()));
+				.getBillNo()));
 		logger.info("-----------------------After setting billNo");
 		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
 				.getDestMdn()));

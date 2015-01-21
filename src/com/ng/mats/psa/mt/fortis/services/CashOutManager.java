@@ -122,15 +122,15 @@ public class CashOutManager {
 		nameValuePairList.add(new NameValuePair("sourcePocketCode",
 				moneyTransfer.getSourcePocketCode()));
 		logger.info("-----------------------After setting sourcePocketCode");
-		/*
-		 * nameValuePairList.add(new NameValuePair("transferID", moneyTransfer
-		 * .getTransferId()));
-		 * logger.info("-----------------------After setting transferID");
-		 * nameValuePairList.add(new NameValuePair("secreteCode", moneyTransfer
-		 * .getSecreteCode()));
-		 * logger.info("-----------------------After setting secreteCode" +
-		 * moneyTransfer.getSecreteCode());
-		 */nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
+
+		nameValuePairList.add(new NameValuePair("transferID", moneyTransfer
+				.getTransferId()));
+		logger.info("-----------------------After setting transferID");
+		nameValuePairList.add(new NameValuePair("secreteCode", moneyTransfer
+				.getSecreteCode()));
+		logger.info("-----------------------After setting secreteCode"
+				+ moneyTransfer.getSecreteCode());
+		nameValuePairList.add(new NameValuePair("destMDN", moneyTransfer
 				.getDestMdn()));
 		logger.info("-----------------------After setting destMDN::"
 				+ moneyTransfer.getDestMdn());
