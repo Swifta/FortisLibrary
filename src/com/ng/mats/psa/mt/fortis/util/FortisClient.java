@@ -169,11 +169,11 @@ public class FortisClient {
 		moneyTransfer.setSecreteCode("384138407");
 		moneyTransfer.setTransferId("475688");
 		// Response response = performBillPayment(moneyTransfer);
-		Response response = performThirdPartyPayment(moneyTransfer);
+		// Response response = performThirdPartyPayment(moneyTransfer);
 		// Response response = performCashin(moneyTransfer);
 		// Response response = getBalance(moneyTransfer);
 		// Response response = performAirtimeSales(moneyTransfer);
-		// Response response = performCashoutUnregistered(moneyTransfer);
+		Response response = performCashoutUnregistered(moneyTransfer);
 		logger.info("-----------------------After initiating login"
 				+ response.toString());
 	}
