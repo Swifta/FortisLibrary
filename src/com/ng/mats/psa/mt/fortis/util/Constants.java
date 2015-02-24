@@ -6,6 +6,7 @@ public class Constants {
 	public final static String agentNumber = "2348051739048";
 	public final static String customerNumber = "2348066569192";
 	public final static String unregisteredCustomerNumber = "2348063305711";
+	public final static String bankAccountNumber = "93847279822";
 	public final static String agentPIN = "6138";
 	public final static String agentCode = "abj00289";
 
@@ -61,6 +62,8 @@ public class Constants {
 	public final static String TXNDRAFTREQUEST = "DraftRequest";
 	public final static String TXNACCOUNTOPENINGREQUEST = "AccountOpeningRequest";
 	public final static String TXNLOGIN = "Login";
+	public final static String TXNW2BINQUIRY = "InterEmoneyTransferInquiry";
+	public final static String TXNW2B = "InterEmoneyTransfer";
 
 	// sourcepocketcode
 	public final static String SOURCEPOCKETCODEWALLET = "1";

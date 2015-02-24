@@ -40,6 +40,9 @@ public class MoneyTransfer {
 	private String billNo;
 	// third party
 	private String partnerCode;
+	// wallet to bank
+	private String naration;
+	private String benOpCode;
 
 	public MoneyTransfer() {
 
@@ -259,6 +262,22 @@ public class MoneyTransfer {
 
 	public void setPartnerCode(String partnerCode) {
 		this.partnerCode = partnerCode;
+	}
+
+	public String getNaration() {
+		return naration;
+	}
+
+	public void setNaration(String naration) {
+		this.naration = naration;
+	}
+
+	public String getBenOpCode() {
+		return benOpCode;
+	}
+
+	public void setBenOpCode(String benOpCode) {
+		this.benOpCode = benOpCode;
 	}
 
 }

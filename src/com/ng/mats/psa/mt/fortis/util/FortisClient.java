@@ -9,6 +9,7 @@ import com.ng.mats.psa.mt.fortis.services.CashInManager;
 import com.ng.mats.psa.mt.fortis.services.CashOutManager;
 import com.ng.mats.psa.mt.fortis.services.LoginManager;
 import com.ng.mats.psa.mt.fortis.services.ThirdPartyPaymentManager;
+import com.ng.mats.psa.mt.fortis.services.Wallet2BankManager;
 import com.ng.mats.psa.mt.fortis.xmlprocessor.Response;
 
 public class FortisClient {
@@ -139,6 +140,7 @@ public class FortisClient {
 	}
 
 	public Response performThirdPartyPayment(MoneyTransfer moneyTransfer) {
+
 		ThirdPartyPaymentManager thirdPartyPaymentManager = new ThirdPartyPaymentManager();
 		Response response = thirdPartyPaymentManager
 				.initiateThirdPartyPayment(moneyTransfer);
@@ -154,10 +156,27 @@ public class FortisClient {
 		return response;
 	}
 
+	public Response performW2B(MoneyTransfer moneyTransfer) {
+		Wallet2BankManager wallet2BankManager = new Wallet2BankManager();
+		Response response = wallet2BankManager
+				.initiateWalletToBank(moneyTransfer);
+		if (response != null) {
+			if (response.getTransferID() != null)
+				moneyTransfer
+						.setTransferId(response.getTransferID().getValue());
+			if (response.getParentTxnID() != null)
+				moneyTransfer.setParentTxnId(response.getParentTxnID()
+						.getValue());
+		}
+		wallet2BankManager.confirmWalletToBank(moneyTransfer);
+		return response;
+	}
+
 	public void finalizeFortisClient() {
 		moneyTransfer.setSourcePocketCode(Constants.SOURCEPOCKETCODEWALLET);
 		// moneyTransfer.setDestMdn(Constants.customerNumber);
 		moneyTransfer.setDestMdn(Constants.unregisteredCustomerNumber);
+		moneyTransfer.setDestMdn(Constants.bankAccountNumber);
 		moneyTransfer.setConfirmed("true");
 		moneyTransfer.setAgentCode(Constants.agentCode);
 		moneyTransfer.setDestPocketCode(Constants.DESTINATIONPOCKETCODEWALLET);
@@ -168,12 +187,15 @@ public class FortisClient {
 		moneyTransfer.setPartnerCode("MER287");
 		moneyTransfer.setSecreteCode("384138407");
 		moneyTransfer.setTransferId("475688");
+		moneyTransfer.setNaration("This is transfer to bank from fortis");
+		moneyTransfer.setBenOpCode("00001");
 		// Response response = performBillPayment(moneyTransfer);
 		// Response response = performThirdPartyPayment(moneyTransfer);
 		// Response response = performCashin(moneyTransfer);
-		// Response response = getBalance(moneyTransfer);
+		Response response = getBalance(moneyTransfer);
 		// Response response = performAirtimeSales(moneyTransfer);
-		Response response = performCashoutUnregistered(moneyTransfer);
+		// Response response = performW2B(moneyTransfer);
+		// Response response = performCashoutUnregistered(moneyTransfer);
 		logger.info("-----------------------After initiating login"
 				+ response.toString());
 	}
