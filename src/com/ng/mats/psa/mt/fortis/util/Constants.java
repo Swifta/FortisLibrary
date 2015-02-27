@@ -1,14 +1,6 @@
 package com.ng.mats.psa.mt.fortis.util;
 
 public class Constants {
-	public final static String CHANNELID = "7";
-
-	public final static String agentNumber = "2348051739048";
-	public final static String customerNumber = "2348066569192";
-	public final static String unregisteredCustomerNumber = "2348063305711";
-	public final static String bankAccountNumber = "93847279822";
-	public final static String agentPIN = "6138";
-	public final static String agentCode = "abj00289";
 
 	public final static String account = "Account";
 	public final static String wallet = "Wallet";
@@ -65,11 +57,4 @@ public class Constants {
 	public final static String TXNW2BINQUIRY = "InterEmoneyTransferInquiry";
 	public final static String TXNW2B = "InterEmoneyTransfer";
 
-	// sourcepocketcode
-	public final static String SOURCEPOCKETCODEWALLET = "1";
-	public final static String SOURCEPOCKETCODEBANK = "2";
-
-	// destpocketcode
-	public final static String DESTINATIONPOCKETCODEWALLET = "1";
-	public final static String DESTINATIONPOCKETCODEBANK = "2";
 }

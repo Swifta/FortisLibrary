@@ -19,9 +19,8 @@ public class FortisClient {
 
 	public FortisClient(String serviceName, String txnName) {
 		logger.info("-----------------------Inside instance of Fortis Client");
-		moneyTransfer.setChannelId(Constants.CHANNELID);
-		moneyTransfer.setSourceMdn(Constants.agentNumber);
-		moneyTransfer.setSourcePin(Constants.agentPIN);
+		FortisPropertyValues fortisPropertyValues = new FortisPropertyValues();
+		moneyTransfer = fortisPropertyValues.getPropertyValues();
 		moneyTransfer.setService(serviceName);
 		moneyTransfer.setTxnName(txnName);
 		logger.info("-----------------------After setting attributes of money transfer");
@@ -173,22 +172,10 @@ public class FortisClient {
 	}
 
 	public void finalizeFortisClient() {
-		moneyTransfer.setSourcePocketCode(Constants.SOURCEPOCKETCODEWALLET);
-		// moneyTransfer.setDestMdn(Constants.customerNumber);
-		moneyTransfer.setDestMdn(Constants.unregisteredCustomerNumber);
-		moneyTransfer.setDestMdn(Constants.bankAccountNumber);
-		moneyTransfer.setConfirmed("true");
-		moneyTransfer.setAgentCode(Constants.agentCode);
-		moneyTransfer.setDestPocketCode(Constants.DESTINATIONPOCKETCODEWALLET);
-		moneyTransfer.setAmount("480");
-		moneyTransfer.setCompanyId("");
-		moneyTransfer.setBillerCode("20702");
-		moneyTransfer.setBillNo("12345678");
-		moneyTransfer.setPartnerCode("MER287");
-		moneyTransfer.setSecreteCode("384138407");
-		moneyTransfer.setTransferId("475688");
-		moneyTransfer.setNaration("This is transfer to bank from fortis");
-		moneyTransfer.setBenOpCode("00001");
+		// *****Ensure the code for ignoring certificate is removed
+		// *
+		// *
+
 		// Response response = performBillPayment(moneyTransfer);
 		// Response response = performThirdPartyPayment(moneyTransfer);
 		// Response response = performCashin(moneyTransfer);

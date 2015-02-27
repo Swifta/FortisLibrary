@@ -6,7 +6,16 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.logging.Logger;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.NameValuePair;
@@ -36,6 +45,7 @@ public class ConnectionManager {
 
 	public static String connectToUrl(String webPage) {
 		String result = "";
+
 		try {
 			String name = "admin";
 			String password = "admin";
@@ -48,8 +58,50 @@ public class ConnectionManager {
 			String authStringEnc = new String(authEncBytes);
 			System.out.println("Base64 encoded auth string: " + authStringEnc);
 			logger.info("-----------------------Before instantiating the URL");
+
+			// new codes for ignoring certificate wahala
+			final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+				@Override
+				public void checkClientTrusted(final X509Certificate[] chain,
+						final String authType) {
+				}
+
+				@Override
+				public void checkServerTrusted(final X509Certificate[] chain,
+						final String authType) {
+				}
+
+				@Override
+				public X509Certificate[] getAcceptedIssuers() {
+					return null;
+				}
+			} };
+
+			// Install the all-trusting trust manager
+			final SSLContext sslContext = SSLContext.getInstance("SSL");
+			sslContext.init(null, trustAllCerts,
+					new java.security.SecureRandom());
+			// Create an ssl socket factory with our all-trusting manager
+			final SSLSocketFactory sslSocketFactory = sslContext
+					.getSocketFactory();
+
+			// end of code for blocking certificate wahala
+
 			URL url = new URL(webPage);
 			URLConnection urlConnection = url.openConnection();
+			// All set up, we can get a resource through https now:
+
+			// from here to int c
+			// final URLConnection urlCon = new URL(
+			// "https://someserver.yo/resource" ).openConnection();
+			// Tell the url connection object to use our socket factory which
+			// bypasses security checks
+			((HttpsURLConnection) urlConnection)
+					.setSSLSocketFactory(sslSocketFactory);
+
+			// final InputStream input = urlCon.getInputStream();
+			// int c;
+
 			logger.info("-----------------------After opening connection");
 			urlConnection.setRequestProperty("Authorization", "Basic "
 					+ authStringEnc);
@@ -73,6 +125,12 @@ public class ConnectionManager {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
