@@ -178,8 +178,8 @@ public class FortisClient {
 
 		// Response response = performBillPayment(moneyTransfer);
 		// Response response = performThirdPartyPayment(moneyTransfer);
-		// Response response = performCashin(moneyTransfer);
-		Response response = getBalance(moneyTransfer);
+		Response response = performCashin(moneyTransfer);
+		// Response response = getBalance(moneyTransfer);
 		// Response response = performAirtimeSales(moneyTransfer);
 		// Response response = performW2B(moneyTransfer);
 		// Response response = performCashoutUnregistered(moneyTransfer);
