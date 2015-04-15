@@ -28,6 +28,7 @@ public class FortisClient {
 
 		logger.info("-----------------------after instantiating login manager");
 		loginManager.initiateLogin(moneyTransfer);
+		setMoneyTransfer(moneyTransfer);
 
 	}
 
@@ -185,6 +186,14 @@ public class FortisClient {
 		// Response response = performCashoutUnregistered(moneyTransfer);
 		logger.info("-----------------------After initiating login"
 				+ response.toString());
+	}
+
+	public MoneyTransfer getMoneyTransfer() {
+		return moneyTransfer;
+	}
+
+	public void setMoneyTransfer(MoneyTransfer moneyTransfer) {
+		this.moneyTransfer = moneyTransfer;
 	}
 
 	public static void main(String args[]) {
